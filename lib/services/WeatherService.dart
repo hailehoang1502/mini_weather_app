@@ -39,7 +39,7 @@ class WeatherService {
 
     // extract the city name from the first placemark
     String? city = placemarks[0].administrativeArea;
-    print(placemarks);
+    // print(placemarks);
     return city ?? "";
   }
 }
