@@ -139,7 +139,7 @@ class _WeatherPageState extends State<WeatherPage> {
                   Container(
                     margin: const EdgeInsets.only(top: 80, right: 15),
                     child: Container(
-                      height: 50,
+                      height: 45,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
@@ -151,6 +151,7 @@ class _WeatherPageState extends State<WeatherPage> {
                           onPressed: () {
                             _fetchWeatherFromAnotherCity(
                                 textEditingController.text);
+                            textEditingController.clear();
                           },
                           child: const Icon(
                             Icons.search,
