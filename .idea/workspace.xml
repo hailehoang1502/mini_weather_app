@@ -9,10 +9,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c3742a62-0d19-41d4-98b5-e8a2badf08ce" name="Changes" comment="update the button UI, clear textField after clicking the button">
+    <list default="true" id="c3742a62-0d19-41d4-98b5-e8a2badf08ce" name="Changes" comment="UI update, more detailed stats">
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models/Weather.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/Weather.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/WeatherPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/WeatherPage.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,7 +55,7 @@
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
     "io.flutter.reload.alreadyRun": "true",
-    "last_opened_file_path": "C:/Users/ACER/Desktop/AndroidDevelopment/Flutter Personal Project/mini_ecommerce_app",
+    "last_opened_file_path": "C:/Users/ACER/Desktop/AndroidDevelopment/Flutter Personal Project/mini_weather_app_2/mini_weather_app",
     "settings.editor.selected.configurable": "configurable.group.language",
     "show.migrate.to.gradle.popup": "false"
   }
@@ -138,7 +137,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713002626829</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="UI update, more detailed stats">
+      <option name="closed" value="true" />
+      <created>1713093106743</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1713093106743</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -160,6 +167,7 @@
     <MESSAGE value="add a search box and a button to search for the weather in another city" />
     <MESSAGE value="update the button UI, loading animation, loading temp, keyboard is closed after clicking the button" />
     <MESSAGE value="update the button UI, clear textField after clicking the button" />
-    <option name="LAST_COMMIT_MESSAGE" value="update the button UI, clear textField after clicking the button" />
+    <MESSAGE value="UI update, more detailed stats" />
+    <option name="LAST_COMMIT_MESSAGE" value="UI update, more detailed stats" />
   </component>
 </project>

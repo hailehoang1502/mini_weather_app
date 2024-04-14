@@ -141,12 +141,10 @@ class _WeatherPageState extends State<WeatherPage> {
                     height: 45,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          elevation: 5,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)
-                          )
-                        ),
+                            backgroundColor: Colors.white,
+                            elevation: 5,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20))),
                         onPressed: () {
                           _fetchWeatherFromAnotherCity(
                               textEditingController.text);
@@ -156,145 +154,204 @@ class _WeatherPageState extends State<WeatherPage> {
                           Icons.search,
                           color: Colors.black,
                           size: 30,
-                        )
-                    ),
+                        )),
                   ),
                 )
               ],
             ),
-
             const SizedBox(
-              height: 50,
+              height: 30,
             ),
-
-
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(width: 0.5, color: Colors.black),
-                borderRadius: BorderRadius.circular(5)
-              ),
-              padding: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
-              margin: EdgeInsets.only(left: 10, right: 10),
-              child: Column(
-                children: [
+            Expanded(
+                child: ListView(children: [
+              // weather tab container
+              Container(
+                margin: EdgeInsets.only(left: 10, right: 10),
+                child: Column(children: [
                   // city name, coutry, main condition and animation Row
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      //city name, country and main weather condition Column
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.lightBlueAccent,
+                        border:
+                            Border.all(width: 0.5, color: Colors.transparent),
+                        borderRadius: const BorderRadius.only(
+                            topRight: Radius.circular(5),
+                            topLeft: Radius.circular(5))),
+                    padding: const EdgeInsets.only(
+                        left: 20, right: 10, top: 5, bottom: 5),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          //city name, country name
+                          //city name, country and main weather condition Column
+                          Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                //city name, country name
+                                SizedBox(
+                                  width: 180,
+                                  child: Text(
+                                    _weather?.cityName != null
+                                        ? '${_weather?.cityName}, ${_weather?.country}'
+                                        : "loading city ...",
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        shadows: [
+                                          Shadow(
+                                              offset: Offset(2, 2),
+                                              blurRadius: 15,
+                                              color: Colors.black45)
+                                        ],
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 30),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+
+                                //weather condition
+                                Text(
+                                  _weather?.mainCondition ?? "",
+                                  style: const TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                      shadows: [
+                                        Shadow(
+                                            offset: Offset(2, 2),
+                                            blurRadius: 15,
+                                            color: Colors.black45)
+                                      ]),
+                                )
+                              ]),
+
+                          //animation
+                          Container(
+                              height: 100,
+                              width: 100,
+                              child: Lottie.asset(getWeatherAnimation(
+                                  _weather?.mainCondition))),
+                        ]),
+                  ),
+
+                  // temperature and details Row
+                  Container(
+                    decoration: BoxDecoration(
+                        color: const Color(0xFFE8F12D),
+                        border:
+                            Border.all(width: 0.5, color: Colors.transparent),
+                        borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(5),
+                            bottomRight: Radius.circular(5))),
+                    padding: const EdgeInsets.only(
+                        left: 20, right: 10, top: 10, bottom: 10),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          //temperature
                           SizedBox(
                             width: 180,
                             child: Text(
-                              _weather?.cityName != null
-                                  ? '${_weather?.cityName}, ${_weather?.country}'
-                                  : "loading city ...",
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 30),
-                              overflow: TextOverflow.ellipsis,
-                            ),
+                                _weather?.temperature != null
+                                    ? '${_weather?.temperature.round()}°C'
+                                    : "loading temperature ...",
+                                style: const TextStyle(
+                                    fontSize: 75, fontWeight: FontWeight.bold),
+                                overflow: TextOverflow.ellipsis),
                           ),
 
-                          //weather condition
-                          Text(
-                            _weather?.mainCondition ?? "",
-                            style: const TextStyle(fontSize: 20),
-                          )
+                          Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Details
+                                const Text("Details",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                const Text("--------------------------------",
+                                    style: TextStyle(color: Colors.blue),
+                                ),
+
+                                // feels like Row
+                                Row(children: [
+                                  const Text("Feels like"),
+                                  const SizedBox(width: 30),
+                                  Text(
+                                      _weather?.feelsLike != null
+                                          ? '${_weather?.feelsLike.round()}°C'
+                                          : "loading...",
+                                      style: const TextStyle(
+                                          overflow: TextOverflow.ellipsis))
+                                ]),
+
+                                // wind speed Row
+                                Row(children: [
+                                  const Text("Wind"),
+                                  const SizedBox(
+                                    width: 30,
+                                  ),
+                                  Text(
+                                      _weather?.windSpeed != null
+                                          ? '${_weather?.windSpeed.round()} m/s'
+                                          : "loading...",
+                                      style: const TextStyle(
+                                          overflow: TextOverflow.ellipsis))
+                                ]),
+
+                                // min temperature Row
+                                Row(children: [
+                                  const Text("Min Temp"),
+                                  const SizedBox(
+                                    width: 30,
+                                  ),
+                                  Text(
+                                      _weather?.minTemp != null
+                                          ? '${_weather?.minTemp.round()}°C'
+                                          : "loading...",
+                                      style: const TextStyle(
+                                          overflow: TextOverflow.ellipsis))
+                                ]),
+
+                                // max temperature Row
+                                Row(children: [
+                                  const Text("Max Temp"),
+                                  const SizedBox(
+                                    width: 30,
+                                  ),
+                                  Text(
+                                      _weather?.maxTemp != null
+                                          ? '${_weather?.maxTemp.round()}°C'
+                                          : "loading...",
+                                      style: const TextStyle(
+                                          overflow: TextOverflow.ellipsis))
+                                ]),
+
+                                // humidity Row
+                                Row(children: [
+                                  const Text("Humidity"),
+                                  const SizedBox(
+                                    width: 30,
+                                  ),
+                                  Text(
+                                      _weather?.humidity != null
+                                          ? '${_weather?.humidity.round()}%'
+                                          : "loading...",
+                                      style: const TextStyle(
+                                          overflow: TextOverflow.ellipsis))
+                                ]),
+                              ])
                         ]),
-
-                      //animation
-                      Container(
-                          height: 100,
-                          width: 100,
-                          child: Lottie.asset(getWeatherAnimation(_weather?.mainCondition))
-                      ),
-                    ]),
-
-                  // temperature and details Row
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      //temperature
-                      SizedBox(
-                        width: 180,
-                        child: Text(
-                          _weather?.temperature != null
-                              ? '${_weather?.temperature.round()}°C'
-                              : "loading temperature ...",
-                          style: const TextStyle(
-                              fontSize: 75,
-                              fontWeight: FontWeight.bold),
-                          overflow: TextOverflow.ellipsis
-                        ),
-                      ),
-
-                      // Details Column
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Details
-                          Text("Details", style: TextStyle(fontWeight: FontWeight.bold)),
-                          Text("-----------------------------", style: TextStyle(color: Colors.blue)),
-
-                          // feels like Row
-                          Row(
-                            children: [
-                              const Text("Feels like"),
-                              const SizedBox(width: 30),
-                              Text('${_weather?.temperature.round()}°C')
-                            ]),
-
-                          // wind speed Row
-                          Row(
-                            children: [
-                              const Text("Wind"),
-                              const SizedBox(width: 30,),
-                              Text('${_weather?.windSpeed.round()} m/s')
-                            ]),
-
-                          // min temperature Row
-                          Row(
-                            children: [
-                              const Text("Min Temp"),
-                              const SizedBox(width: 30,),
-                              Text('${_weather?.minTemp.round()}°C')
-                            ]),
-
-                          // max temperature Row
-                          Row(
-                              children: [
-                                const Text("Max Temp"),
-                                const SizedBox(width: 30,),
-                                Text('${_weather?.maxTemp.round()}°C')
-                              ]),
-
-                          // humidity Row
-                          Row(
-                              children: [
-                                const Text("Humidity"),
-                                const SizedBox(width: 30,),
-                                Text('${_weather?.minTemp.round()}%')
-                              ]),
-                        ])
-                    ]),
+                  ),
                 ]),
-            ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
 
+              SizedBox(
+                height: 15,
+              ),
 
-
-
-            const SizedBox(
-              height: 10,
-            ),
-
-
-            SizedBox(height: 10,),
-
-
+              SizedBox(
+                height: 15,
+              ),
+            ])),
           ],
         ));
   }
