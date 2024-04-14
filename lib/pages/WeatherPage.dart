@@ -160,7 +160,7 @@ class _WeatherPageState extends State<WeatherPage> {
               ],
             ),
             const SizedBox(
-              height: 30,
+              height: 150,
             ),
             Expanded(
                 child: ListView(children: [
@@ -261,78 +261,65 @@ class _WeatherPageState extends State<WeatherPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 // Details
+                                //Container chiều cao = 1 và đổ màu vào
                                 const Text("Details",
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
                                 const Text("--------------------------------",
                                     style: TextStyle(color: Colors.blue),
                                 ),
-
                                 // feels like Row
                                 Row(children: [
-                                  const Text("Feels like"),
-                                  const SizedBox(width: 30),
+                                  SizedBox(width:90, child: const Text("Feels like")),
                                   Text(
                                       _weather?.feelsLike != null
                                           ? '${_weather?.feelsLike.round()}°C'
                                           : "loading...",
-                                      style: const TextStyle(
+                                      style: const TextStyle(fontWeight: FontWeight.bold,
                                           overflow: TextOverflow.ellipsis))
                                 ]),
 
                                 // wind speed Row
                                 Row(children: [
-                                  const Text("Wind"),
-                                  const SizedBox(
-                                    width: 30,
-                                  ),
+                                  SizedBox(width: 90, child: const Text("Wind")),
                                   Text(
                                       _weather?.windSpeed != null
                                           ? '${_weather?.windSpeed.round()} m/s'
                                           : "loading...",
-                                      style: const TextStyle(
+                                      style: const TextStyle(fontWeight: FontWeight.bold,
                                           overflow: TextOverflow.ellipsis))
                                 ]),
 
                                 // min temperature Row
                                 Row(children: [
-                                  const Text("Min Temp"),
-                                  const SizedBox(
-                                    width: 30,
-                                  ),
+                                  SizedBox(width: 90, child: const Text("Min Temp")),
                                   Text(
                                       _weather?.minTemp != null
                                           ? '${_weather?.minTemp.round()}°C'
                                           : "loading...",
-                                      style: const TextStyle(
+                                      style: const TextStyle(fontWeight: FontWeight.bold,
                                           overflow: TextOverflow.ellipsis))
                                 ]),
 
                                 // max temperature Row
                                 Row(children: [
-                                  const Text("Max Temp"),
-                                  const SizedBox(
-                                    width: 30,
-                                  ),
+                                  SizedBox(width: 90, child: const Text("Max Temp")),
                                   Text(
                                       _weather?.maxTemp != null
                                           ? '${_weather?.maxTemp.round()}°C'
                                           : "loading...",
-                                      style: const TextStyle(
+                                      style: const TextStyle(fontWeight: FontWeight.bold,
                                           overflow: TextOverflow.ellipsis))
                                 ]),
 
                                 // humidity Row
                                 Row(children: [
-                                  const Text("Humidity"),
-                                  const SizedBox(
-                                    width: 30,
-                                  ),
+                                  SizedBox(width: 90, child: const Text("Humidity")),
                                   Text(
                                       _weather?.humidity != null
                                           ? '${_weather?.humidity.round()}%'
                                           : "loading...",
-                                      style: const TextStyle(
+                                      style: const TextStyle(fontWeight: FontWeight.bold,
                                           overflow: TextOverflow.ellipsis))
                                 ]),
                               ])
