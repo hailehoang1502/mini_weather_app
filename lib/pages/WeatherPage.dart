@@ -126,79 +126,176 @@ class _WeatherPageState extends State<WeatherPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Center(
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: searchBox(),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 80, right: 15),
-                    child: Container(
-                      height: 45,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            elevation: 5,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)
-                            )
-                          ),
-                          onPressed: () {
-                            _fetchWeatherFromAnotherCity(
-                                textEditingController.text);
-                            textEditingController.clear();
-                          },
-                          child: const Icon(
-                            Icons.search,
-                            color: Colors.black,
-                            size: 30,
+        body: Column(
+          // mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: searchBox(),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 80, right: 15),
+                  child: Container(
+                    height: 45,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          elevation: 5,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)
                           )
-                      ),
+                        ),
+                        onPressed: () {
+                          _fetchWeatherFromAnotherCity(
+                              textEditingController.text);
+                          textEditingController.clear();
+                        },
+                        child: const Icon(
+                          Icons.search,
+                          color: Colors.black,
+                          size: 30,
+                        )
                     ),
-                  )
-                ],
+                  ),
+                )
+              ],
+            ),
+
+            const SizedBox(
+              height: 50,
+            ),
+
+
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(width: 0.5, color: Colors.black),
+                borderRadius: BorderRadius.circular(5)
               ),
+              padding: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+              margin: EdgeInsets.only(left: 10, right: 10),
+              child: Column(
+                children: [
+                  // city name, coutry, main condition and animation Row
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      //city name, country and main weather condition Column
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          //city name, country name
+                          SizedBox(
+                            width: 180,
+                            child: Text(
+                              _weather?.cityName != null
+                                  ? '${_weather?.cityName}, ${_weather?.country}'
+                                  : "loading city ...",
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 30),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
 
-              const SizedBox(
-                height: 150,
-              ),
+                          //weather condition
+                          Text(
+                            _weather?.mainCondition ?? "",
+                            style: const TextStyle(fontSize: 20),
+                          )
+                        ]),
 
-              //city name
-              Text(
-                _weather?.cityName ?? "loading city ...",
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
+                      //animation
+                      Container(
+                          height: 100,
+                          width: 100,
+                          child: Lottie.asset(getWeatherAnimation(_weather?.mainCondition))
+                      ),
+                    ]),
 
-              //animation
-              Container(
-                  height: 280,
-                  width: 280,
-                  child: Lottie.asset(getWeatherAnimation(_weather?.mainCondition))),
+                  // temperature and details Row
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      //temperature
+                      SizedBox(
+                        width: 180,
+                        child: Text(
+                          _weather?.temperature != null
+                              ? '${_weather?.temperature.round()}°C'
+                              : "loading temperature ...",
+                          style: const TextStyle(
+                              fontSize: 75,
+                              fontWeight: FontWeight.bold),
+                          overflow: TextOverflow.ellipsis
+                        ),
+                      ),
 
-              const SizedBox(
-                height: 10,
-              ),
+                      // Details Column
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Details
+                          Text("Details", style: TextStyle(fontWeight: FontWeight.bold)),
+                          Text("-----------------------------", style: TextStyle(color: Colors.blue)),
 
-              //temperature
-              Text(
-                _weather?.temperature != null ? '${_weather?.temperature.round()}°C' : "loading temperature ...",
-                style: TextStyle(fontSize: 20),
-              ),
+                          // feels like Row
+                          Row(
+                            children: [
+                              const Text("Feels like"),
+                              const SizedBox(width: 30),
+                              Text('${_weather?.temperature.round()}°C')
+                            ]),
 
-              SizedBox(height: 10,),
+                          // wind speed Row
+                          Row(
+                            children: [
+                              const Text("Wind"),
+                              const SizedBox(width: 30,),
+                              Text('${_weather?.windSpeed.round()} m/s')
+                            ]),
 
-              //weather condition
-              Text(
-                _weather?.mainCondition ?? "",
-                style: const TextStyle(fontSize: 20),
-              )
-            ],
-          ),
+                          // min temperature Row
+                          Row(
+                            children: [
+                              const Text("Min Temp"),
+                              const SizedBox(width: 30,),
+                              Text('${_weather?.minTemp.round()}°C')
+                            ]),
+
+                          // max temperature Row
+                          Row(
+                              children: [
+                                const Text("Max Temp"),
+                                const SizedBox(width: 30,),
+                                Text('${_weather?.maxTemp.round()}°C')
+                              ]),
+
+                          // humidity Row
+                          Row(
+                              children: [
+                                const Text("Humidity"),
+                                const SizedBox(width: 30,),
+                                Text('${_weather?.minTemp.round()}%')
+                              ]),
+                        ])
+                    ]),
+                ]),
+            ),
+
+
+
+
+            const SizedBox(
+              height: 10,
+            ),
+
+
+            SizedBox(height: 10,),
+
+
+          ],
         ));
   }
 }
