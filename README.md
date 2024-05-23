@@ -1,16 +1,9 @@
 # mini_weather_app
 
-A new Flutter project.
+A new mini weather app Flutter project.
 
-## Getting Started
+Description: Call API from openweathermap.org to return the weather in the city where the user lives. In addition, the user can searchs for weather information in other cities around the world.
 
-This project is a starting point for a Flutter application.
+- [Demo video](https://drive.google.com/file/d/1bRWAfyAoorCXv-xUiFzhfF2m43HciA-5/view?usp=sharing)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
